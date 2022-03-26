@@ -11,7 +11,8 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
-with open('data.csv','r') as file:
+from collections import Counter
+with open('data.csv','r') as file:  
   datos=file.readlines()
   datos1=[row.replace('\n',' ') for row in datos]
   datos1=[row.split('\t') for row in datos1]
@@ -48,7 +49,13 @@ def pregunta_02():
     ]
 
     """
-    return
+    datos2=[row[0] for row in datos]
+
+    Result=Counter(datos2).most_common()
+
+    Result.sort(reverse=False)
+    Result
+    return Result
 
 
 def pregunta_03():
