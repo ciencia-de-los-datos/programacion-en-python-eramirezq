@@ -13,21 +13,20 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 with open('data.csv','r') as file:
   datos=file.readlines()
-  datos=[row.replace('\n',' ') for row in datos]
-  datos=[row.split('\t') for row in datos]
+  datos1=[row.replace('\n',' ') for row in datos]
+  datos1=[row.split('\t') for row in datos1]
+  datos1=[row[1] for row in datos1]
 
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
 
-
     Rta/
     214
 
     """
-    datos=[row[1] for row in datos]
     suma=0
-    for i in datos:
+    for i in datos1[:]:
         suma += int(i)
     
     return suma
