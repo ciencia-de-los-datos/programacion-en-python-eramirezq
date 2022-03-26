@@ -11,18 +11,27 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
-
+with open('data.csv','r') as file:
+  datos=file.readlines()
+  datos=[row.replace('\n',' ') for row in datos]
+  datos=[row.split('\t') for row in datos]
 
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
-    prueba
+
 
     Rta/
     214
 
     """
-    return
+    datos=[row[1] for row in datos]
+    suma=0
+    for i in datos:
+        suma += int(i)
+    
+    return suma
+
 
 
 def pregunta_02():
