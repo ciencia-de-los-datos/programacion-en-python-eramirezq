@@ -14,9 +14,10 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 from collections import Counter
 with open('data.csv','r') as file:  
   datos=file.readlines()
-  datos1=[row.replace('\n',' ') for row in datos]
-  datos1=[row.split('\t') for row in datos1]
-  datos1=[row[1] for row in datos1]
+  datos=[row.replace('\n','') for row in datos]
+  datos=[row.split('\t') for row in datos]
+  datos1=[row[1] for row in datos]
+  datos1=[int(x) for x in datos1]
 
 def pregunta_01():
     """
@@ -28,11 +29,11 @@ def pregunta_01():
     """
     suma=0
     for i in datos1[:]:
-        suma += int(i)
+        suma += i
     
     return suma
 
-
+datos2=[row[0] for row in datos]
 
 def pregunta_02():
     """
@@ -49,12 +50,10 @@ def pregunta_02():
     ]
 
     """
-    datos2=[row[0] for row in datos]
-
+    
     Result=Counter(datos2).most_common()
-
     Result.sort(reverse=False)
-    Result
+    
     return Result
 
 
@@ -71,9 +70,20 @@ def pregunta_03():
         ("D", 31),
         ("E", 67),
     ]
-
+lllsl
     """
-    return
+    L=list(set(datos2))
+    L.sort(reverse=False)
+    datos3=[0]*len(L)
+    R3=[0]*len(L)
+
+    for a in range(0,len(L)):
+      for k in range(0,len(datos1)):
+       if datos2[k]==L[a]:
+        datos3[a] += datos1[k]
+        R3[a]=L[a],datos3[a]
+
+    return R3
 
 
 def pregunta_04():
