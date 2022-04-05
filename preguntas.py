@@ -11,13 +11,13 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+
 from collections import Counter
 with open('data.csv','r') as file:  
   datos=file.readlines()
   datos=[row.replace('\n','') for row in datos]
   datos=[row.split('\t') for row in datos]
-  datos1=[row[1] for row in datos]
-  datos1=[int(x) for x in datos1]
+  
 
 def pregunta_01():
     """
@@ -27,13 +27,15 @@ def pregunta_01():
     214
 
     """
+    datos1=[row[1] for row in datos]
+    datos1=[int(x) for x in datos1]
     suma=0
     for i in datos1[:]:
         suma += i
     
     return suma
 
-datos2=[row[0] for row in datos]
+
 
 def pregunta_02():
     """
@@ -50,11 +52,12 @@ def pregunta_02():
     ]
 
     """
-    
+    datos2=[row[0] for row in datos]
     Result=Counter(datos2).most_common()
     Result.sort(reverse=False)
     
     return Result
+
 
 
 def pregunta_03():
@@ -70,10 +73,15 @@ def pregunta_03():
         ("D", 31),
         ("E", 67),
     ]
-lllsl
+
     """
+    datos1=[row[1] for row in datos]
+    datos1=[int(x) for x in datos1]
+
+    datos2=[row[0] for row in datos]
     L=list(set(datos2))
     L.sort(reverse=False)
+
     datos3=[0]*len(L)
     R3=[0]*len(L)
 
@@ -108,7 +116,15 @@ def pregunta_04():
     ]
 
     """
-    return
+    Fecha=[row[2] for row in datos]
+    Fecha=[row.split('-') for row in Fecha]
+    date=[row[1] for row in Fecha]
+
+
+    R4=Counter(date).most_common()
+    R4.sort(reverse=False)
+
+    return R4
 
 
 def pregunta_05():
@@ -126,7 +142,26 @@ def pregunta_05():
     ]
 
     """
-    return
+    datos1=[int(row[1]) for row in datos]
+    datos2=[row[0] for row in datos]
+    L=list(set(datos2))
+    L.sort(reverse=False)
+
+    Maximo=[0]*len(L)
+    Minimo=[max(datos1)]*len(L)
+    R5=[0]*len(L)
+
+    for i in range(0,len(L)):
+      for j in range(0,len(datos1)):
+        if datos2[j]==L[i]:
+            if datos1[j] > Maximo[i]:
+                Maximo[i]=datos1[j]
+            if datos1[j] < Minimo[i]:
+                Minimo[i]=datos1[j]
+        R5[i]=L[i],Maximo[i],Minimo[i]    
+
+
+    return R5
 
 
 def pregunta_06():
@@ -151,7 +186,30 @@ def pregunta_06():
     ]
 
     """
-    return
+    col5=[row[4].split(',') for row in datos]
+
+    col5=[elem for row in col5 for elem in row]
+    col5=[row.split(':') for row in col5]
+
+
+
+    con=list(set([row[0] for row in col5]))
+    con.sort(reverse=False)
+    my_list=list(zip((row[0] for row in col5),(int(z[1]) for z in col5)))
+
+    max=[0]*len(con)
+    min=[my_list[0][1]]*len(con)
+    R6=[0]*len(con)
+    for r in range(0,len(con)):
+        for h in range(0,len(my_list)):
+            if con[r]==my_list[h][0]:
+                if my_list[h][1]>max[r]:
+                    max[r]=my_list[h][1]
+                if my_list[h][1]<min[r]:
+                    min[r]=my_list[h][1]
+        R6[r]=con[r],min[r],max[r]
+
+    return R6
 
 
 def pregunta_07():
@@ -175,7 +233,24 @@ def pregunta_07():
     ]
 
     """
-    return
+    datos1=[int(row[1]) for row in datos]
+    datos2=[row[0] for row in datos]
+
+
+    lista7=list(set(datos1))
+    col12=list(zip(datos1,datos2))
+
+    R7=[0]*len(lista7)
+
+    for row in lista7:
+        letters=[]
+        for m in range(0,len(col12)):
+            if row==col12[m][0]:
+                letters +=col12[m][1]
+                R7[row]=lista7[row],letters
+
+
+    return R7
 
 
 def pregunta_08():
@@ -200,7 +275,26 @@ def pregunta_08():
     ]
 
     """
-    return
+    datos1=[int(row[1]) for row in datos]
+    datos2=[row[0] for row in datos]
+
+    lista7=list(set(datos1))
+    col12=list(zip(datos1,datos2))
+
+    R8=[0]*len(lista7)
+
+    for row in lista7:
+      letters=[]
+      for m in range(0,len(col12)):
+            if row==col12[m][0]:
+                letters +=col12[m][1]
+                Orden=list(set(letters))
+                Orden.sort(reverse=False)
+
+      R8[row]=lista7[row],Orden
+
+
+    return R8
 
 
 def pregunta_09():
@@ -223,7 +317,15 @@ def pregunta_09():
     }
 
     """
-    return
+    col5=[row[4].split(',') for row in datos]
+
+    col5=[elem for row in col5 for elem in row]
+    col5=[row.split(':') for row in col5]
+
+    coletra=[row[0] for row in col5]
+    R9=Counter(coletra)
+
+    return R9
 
 
 def pregunta_10():
@@ -244,7 +346,23 @@ def pregunta_10():
 
 
     """
-    return
+    datos2=[row[0] for row in datos]
+    co5=[row[4].split(',') for row in datos]
+    co4=[row[3].split(',') for row in datos]
+    cont5=[0]*len(co5)
+    cont4=[0]*len(co4)
+    for i in range(0,len(co5)):
+        for j in range(0,len(co5[i])):
+            cont5[i] +=1
+    
+    for x in range(0,len(co4)):
+        for z in range(0,len(co4[x])):
+            cont4[x] +=1
+
+    
+    R10=list(zip(datos2,cont4,cont5))
+
+    return R10
 
 
 def pregunta_11():
@@ -265,7 +383,24 @@ def pregunta_11():
 
 
     """
-    return
+    data=[row[3]+'-'+row[1] for row in datos]
+    data=[row.split('-') for row in data]
+    datal=[row[0].split(',') for row in data]
+    data1=[datal[row][ele]+','+data[row][1] for row in range(0,len(datal)) for ele in range(0,len(datal[row]))]
+
+    datat=[row.split(',') for row in data1]
+    R11={}
+
+    for letter,value in datat:
+      value=int(value)
+      if letter in R11.keys():
+        R11[letter].append(value)
+      else:
+        R11[letter]=[value]
+
+    R11=dict((key, sum(value)) for key,value in R11.items())
+
+    return R11
 
 
 def pregunta_12():
@@ -283,4 +418,29 @@ def pregunta_12():
     }
 
     """
-    return
+    datos2=[row[0] for row in datos]
+    col5=[row[4].replace(':',',') for row in datos]
+    col5=[row.split(',') for row in col5]
+    col6=[row[1::2] for row in col5]
+
+    T12=[]
+
+    for x in col6:
+        dato=[]
+        for z in x:
+            dato.append(int(z))
+        T12.append(dato)
+    
+    conj=list(zip(datos2,T12))
+    cont=list(set(datos2))
+    cont.sort(reverse=False)
+    contador=[0]*len(cont)
+    for a in range(0,len(cont)):
+        for n,m in conj:
+            if n==cont[a]:
+                contador[a]=contador[a]+sum(m)
+
+        R12=dict(zip(cont,contador))  
+
+
+    return R12
